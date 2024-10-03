@@ -244,7 +244,25 @@ def sgd(X, y, J, dJ, w0, step_size_fn, max_iter):
 
     """
     #Your code here [9]
-    pass
+    w = w0.copy()
+    fs, ws = [], []
+
+    num_samples = X.shape[1]
+
+    for t in range(max_iter):
+        idx = np.random.randint(num_samples)
+    
+        X_i, y_i = X[:, idx:idx+1], y[:, idx:idx+1]
+    
+        cost_val = J(X_i, y_i, w)
+        grad_val = dJ(X_i, y_i, w)
+    
+        fs += [cost_val]
+        ws += [w.copy()]
+    
+        w = w - step_size_fn(t) * grad_val
+
+    return w, fs, ws
 
 ############################################################
 def num_grad(f):
@@ -281,7 +299,14 @@ def sgdTest():
         return num_grad(f)(w)
 
     #Your code here [10]
-    pass
+    w0 = np.zeros((X.shape[0] + 1, 1))
+    
+    def step_size_fn(t):
+        return 0.01 / (1 + 0.01 * t)
+    
+    w, fs, ws = sgd(X, y, J, dJ, w0, step_size_fn, 1000)
+    
+    return w, fs, ws
 
 ############################################################
 
