@@ -94,7 +94,7 @@ def d_lin_reg_th(x, th, th0):
     [[1.0], [1.0]]
     """
     #Your code here [1]
-    return x
+    pass
 
 def d_square_loss_th(x, y, th, th0):
     """Returns the gradient of square_loss(x, y, th, th0) with respect to
@@ -115,7 +115,7 @@ def d_square_loss_th(x, y, th, th0):
     [[4.1], [4.1]]
     """
     #Your code here [2]
-    return -2 * (y - lin_reg(x, th, th0)) * d_lin_reg_th(x, th, th0)
+    pass
 
 def d_mean_square_loss_th(x, y, th, th0):
     """ Returns the gradient of mean_square_loss(x, y, th, th0) with
@@ -130,7 +130,7 @@ def d_mean_square_loss_th(x, y, th, th0):
     [[4.1], [4.1]]
     """
     #Your code here [3]
-    return np.mean(d_square_loss_th(x, y, th, th0), axis=1, keepdims=True)
+    pass
 
 def d_lin_reg_th0(x, th, th0):
     """ Returns the gradient of lin_reg(x, th, th0) with respect to th0.
@@ -141,7 +141,7 @@ def d_lin_reg_th0(x, th, th0):
     [[1.0, 1.0, 1.0, 1.0]]
     """
     #Your code here [4]
-    return np.ones((1, x.shape[1]))
+    pass
 
 def d_square_loss_th0(x, y, th, th0):
     """ Returns the gradient of square_loss(x, y, th, th0) with
@@ -154,7 +154,7 @@ def d_square_loss_th0(x, y, th, th0):
     [[4.1, 3.6999999999999993, 4.5, 3.9000000000000004]]
     """
     #Your code here [5] 
-    return -2 * (y - lin_reg(x, th, th0))
+    pass
 
 def d_mean_square_loss_th0(x, y, th, th0):
     """ Returns the gradient of mean_square_loss(x, y, th, th0) with
@@ -167,7 +167,7 @@ def d_mean_square_loss_th0(x, y, th, th0):
     [[4.05]]
     """
     #Your code here [6]
-    return np.mean(d_square_loss_th0(x, y, th, th0), axis=1, keepdims=True)
+    pass
 
 def d_ridge_obj_th(x, y, th, th0, lam):
     """Return the derivative of tghe ridge objective value with respect
@@ -186,7 +186,7 @@ def d_ridge_obj_th(x, y, th, th0, lam):
     [[210.15], [14.05]]
     """
     #Your code here [7]
-    return d_mean_square_loss_th(x, y, th, th0) + 2 * lam * th
+    pass
 
 def d_ridge_obj_th0(x, y, th, th0, lam):
     """Return the derivative of tghe ridge objective value with respect
@@ -205,7 +205,7 @@ def d_ridge_obj_th0(x, y, th, th0, lam):
     [[4.05]]
     """
     #Your code here [8]
-    return d_mean_square_loss_th0(x, y, th, th0)
+    pass
 
 #Concatenates the gradients with respect to theta and theta_0
 def ridge_obj_grad(x, y, th, th0, lam):
@@ -244,25 +244,7 @@ def sgd(X, y, J, dJ, w0, step_size_fn, max_iter):
 
     """
     #Your code here [9]
-    w = w0.copy()
-    fs, ws = [], []
-
-    num_samples = X.shape[1]
-
-    for t in range(max_iter):
-        idx = np.random.randint(num_samples)
-    
-        X_i, y_i = X[:, idx:idx+1], y[:, idx:idx+1]
-    
-        cost_val = J(X_i, y_i, w)
-        grad_val = dJ(X_i, y_i, w)
-    
-        fs += [cost_val]
-        ws += [w.copy()]
-    
-        w = w - step_size_fn(t) * grad_val
-
-    return w, fs, ws
+    pass
 
 ############################################################
 def num_grad(f):
@@ -299,14 +281,7 @@ def sgdTest():
         return num_grad(f)(w)
 
     #Your code here [10]
-    w0 = np.zeros((X.shape[0] + 1, 1))
-    
-    def step_size_fn(t):
-        return 0.01 / (1 + 0.01 * t)
-    
-    w, fs, ws = sgd(X, y, J, dJ, w0, step_size_fn, 1000)
-    
-    return w, fs, ws
+    pass
 
 ############################################################
 
