@@ -1,15 +1,39 @@
 import numpy as np
 import q3 as q3
+import csv
 
 #-------------------------------------------------------------------------------
 # Auto Data
 #-------------------------------------------------------------------------------
 
-# load auto-mpg-regression.tsv, including  Keys are the column names, including mpg.
-auto_data_all = []
+# Load the auto-mpg-regression.tsv data
+def load_auto_data(path_data):
+    """Load the auto-mpg-regression.tsv file."""
+    auto_data_all = []
+    
+    with open(path_data, 'r') as tsvfile:
+        reader = csv.DictReader(tsvfile, delimiter='\t')
+        
+        for row in reader:
+            # Convert appropriate fields to numeric types
+            for key in row:
+                try:
+                    # Try converting to float, since some values may have decimals
+                    row[key] = float(row[key])
+                except ValueError:
+                    # If conversion fails, it's likely a string and we can leave it
+                    pass
+            
+            auto_data_all.append(row)
+    
+    return auto_data_all
+
+
+# Load the data into auto_data_all
+auto_data_all = load_auto_data('C:/Users/Danik/Documents/GitHub/AIproject1/q3/auto-mpg-regression.tsv')
 
 # The choice of feature processing for each feature, mpg is always raw and
-# does not need to be specified.  Other choices are q3.standard and q3.one_hot.
+# does not need to be specified. Other choices are q3.standard and q3.one_hot.
 
 features1 = [('cylinders', q3.standard),
             ('displacement', q3.standard),
@@ -26,22 +50,17 @@ features2 = [('cylinders', q3.one_hot),
             ('origin', q3.one_hot)]
 
 # Construct the standard data and label arrays
-#auto_data[0] has the features for choice features1
-#auto_data[1] has the features for choice features2
-#The labels for both are the same, and are in auto_values
 auto_data = [0, 0]
 auto_values = 0
 auto_data[0], auto_values = q3.auto_data_and_values(auto_data_all, features1)
 auto_data[1], _ = q3.auto_data_and_values(auto_data_all, features2)
 
-#standardize the y-values
+# Standardize the y-values
 auto_values, mu, sigma = q3.std_y(auto_values)
 
 #-------------------------------------------------------------------------------
 # Analyze auto data
-#-------------------------------------------------------------------------------     
-        
-#Your code for cross-validation goes here
+#-------------------------------------------------------------------------------
 
 def cross_validation(X, y, lam_values, k=10):
     """Performs cross-validation on the dataset for different lambda values."""
