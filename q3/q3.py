@@ -94,7 +94,7 @@ def d_lin_reg_th(x, th, th0):
     [[1.0], [1.0]]
     """
     #Your code here [1]
-    pass
+    return x
 
 def d_square_loss_th(x, y, th, th0):
     """Returns the gradient of square_loss(x, y, th, th0) with respect to
