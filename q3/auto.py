@@ -74,13 +74,20 @@ def cross_validation(X, y, lam_values, k=10):
     best_lam = min(rmse_results, key=rmse_results.get)
     return best_lam, rmse_results[best_lam]
 
-# Define lambda ranges for the grid search
-lambda_values = np.linspace(0, 0.1, 11)
+# Extend lambda range for polynomial features of order 1 and 2
+lambda_values_1_and_2 = np.linspace(0, 1.0, 21)  # Extended from 0 to 1.0
 
-# Perform cross-validation on both feature sets
-best_lambda1, rmse1 = cross_validation(auto_data[0], auto_values, lambda_values)
-best_lambda2, rmse2 = cross_validation(auto_data[1], auto_values, lambda_values)
+# Define lambda ranges for polynomial features of order 3
+lambda_values_3 = np.arange(0, 201, 20)
+
+# Perform cross-validation for polynomial orders 1 and 2
+best_lambda1, rmse1 = cross_validation(auto_data[0], auto_values, lambda_values_1_and_2)
+best_lambda2, rmse2 = cross_validation(auto_data[1], auto_values, lambda_values_1_and_2)
+
+# Perform cross-validation for polynomial order 3
+best_lambda3, rmse3 = cross_validation(auto_data[1], auto_values, lambda_values_3)
 
 # Print results
 print(f"Feature set 1: Best lambda = {best_lambda1}, RMSE = {rmse1}")
 print(f"Feature set 2: Best lambda = {best_lambda2}, RMSE = {rmse2}")
+print(f"Polynomial Order 3: Best lambda = {best_lambda3}, RMSE = {rmse3}")
