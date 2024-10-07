@@ -91,3 +91,4 @@ best_lambda3, rmse3 = cross_validation(auto_data[1], auto_values, lambda_values_
 print(f"Feature set 1: Best lambda = {best_lambda1}, RMSE = {rmse1}")
 print(f"Feature set 2: Best lambda = {best_lambda2}, RMSE = {rmse2}")
 print(f"Polynomial Order 3: Best lambda = {best_lambda3}, RMSE = {rmse3}")
+print(sigma)
